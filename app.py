@@ -6,8 +6,12 @@
 #Dependencies
 import pymongo
 from flask import Flask
-
 from scrape_mars import scrape 
+
+#%%
+dict=scrape()
+dict
+
 #%%
 # * Next, create a route called `/scrape` that will import your `scrape_mars.py` script and call your `scrape` function.
 
@@ -15,8 +19,10 @@ app = Flask(__name__)
 
 @app.route("/scrape")
 def Scrape():
-    print("Server received request for '/scrape' page.\nCalling function scrape() from scrape_mars.py...")
-    return dict
+    print("Server received request for '/scrape' page.")
+    return "Calling function scrape() from scrape_mars.py..."
+    #dict = scrape()
+    #return dict
 
 if __name__ == "__main__":
     app.run(debug=True)

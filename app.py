@@ -5,7 +5,7 @@
 #%%
 #Dependencies
 import pymongo
-from flask import Flask, jsonify
+from flask import Flask, render_template
 
 conn = 'mongodb://localhost:27017'
 client = pymongo.MongoClient(conn)
@@ -31,7 +31,7 @@ def Scrape():
 def home():
     print("Server received request for '/' page...")
     mars_data = db.mission_to_mars.find_one()
-    return str(mars_data)
+    return render_template('index.html', news_title=mars_data['NASA Mars News']['Article Title'],news_paragraph=mars_data['NASA Mars News']['Article Paragraph'],featured_image=mars_data['JPL Featured Image'],mars_weather=mars_data['Mars Weather'],mars_facts=mars_data['Mars Facts'],hemisphere1_title=mars_data['Mars Hemispheres'][0]['title'],hemisphere1_url=mars_data['Mars Hemispheres'][0]['url'],hemisphere2_title=mars_data['Mars Hemispheres'][0]['title'],hemisphere2_url=mars_data['Mars Hemispheres'][0]['url'],hemisphere3_title=mars_data['Mars Hemispheres'][0]['title'],hemisphere3_url=mars_data['Mars Hemispheres'][0]['url'],hemisphere4_title=mars_data['Mars Hemispheres'][0]['title'],hemisphere4_url=mars_data['Mars Hemispheres'][0]['url'])
 
 if __name__ == "__main__":
     app.run(debug=True)

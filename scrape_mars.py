@@ -47,6 +47,7 @@ def scrape():
     soup = bs(response.text,'html.parser')
     html_string = soup.find('table')
     html_table_string = pd.read_html(str(html_string))
+    html_table_string = str(html_table_string)
     url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(url)
     hemispheres = ['Cerberus Hemisphere','Schiaparelli Hemisphere','Syrtis Major Hemisphere','Valles Marineris Hemisphere']
@@ -60,6 +61,7 @@ def scrape():
         hemisphere_images.append(hemisphere_dict)
         browser.back(); time.sleep(2)
         i+=1
-    dict = {'NASA Mars News': {'Article Title':article_title,'Article Paragraph':article_paragraph},'JPL Featured Image':featured_image_url,'Mars Weather':mars_weather,'Mars Facts':html_table_string,'Mars Hemispheres':hemisphere_images}
+    mars_dict = dict()
+    mars_dict = {'NASA Mars News': {'Article Title':article_title,'Article Paragraph':article_paragraph},'JPL Featured Image':featured_image_url,'Mars Weather':mars_weather,'Mars Facts':html_table_string,'Mars Hemispheres':hemisphere_images}
     
-    return dict
+    return mars_dict

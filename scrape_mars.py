@@ -55,8 +55,11 @@ def scrape():
     i = 0
     for hemisphere in hemispheres:
         browser.find_link_by_partial_text(' Hemisphere')[i].click(); time.sleep(2)
-        browser.find_link_by_text("Original").click();time.sleep(2)
+        browser.find_link_by_text("Original");time.sleep(2)
         url = browser.url
+        #url = url + '.tif'
+        #url = url[:4] + url[5:]
+        #url = url.replace('search/map', 'download')
         hemisphere_dict = {'url':url,'title':hemisphere}
         hemisphere_images.append(hemisphere_dict)
         browser.back(); time.sleep(2)
